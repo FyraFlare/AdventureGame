@@ -43,6 +43,13 @@
 		if(password_verify($pass, $psw){
 			session_start()
 			$_SESSION['user'] = $name;
+			$check = $conn->query ("SELECT * FROM users WHERE username='".$name."';");
+			foreach($check as $row){
+				$_SESSION['lvl'] = $row['level'];
+				$_SESSION['exp'] = $row['exp'];
+				$_SESSION['hp'] = $row['health'];
+				$_SESSION['story'] = $row['story'];
+			}
 			//go to main
 		}
 		else{
@@ -53,5 +60,19 @@
 	function logout(){
 		unset($_SESSION['user']);
 		setcookie('PHPSESSID', null, -1, '/');
+	}
+
+	function storeStats(){
+		global $conn;
+		foreach($check as $row){
+			$_SESSION['lvl'] = $row['level'];
+			$_SESSION['exp'] = $row['exp'];
+			$_SESSION['hp'] = $row['health'];
+			$_SESSION['story'] = $row['story'];
+		}
+		$com = "UPDATE users SET level='".$_SESSION['lvl']."', exp='".
+			$_SESSION['exp']."'health='".$_SESSION['hp']."', story='".
+			$_SESSION['story']."' WHERE username='".$name."';");
+		$check = $conn->query ($com);
 	}
 ?>

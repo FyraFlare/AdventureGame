@@ -1,0 +1,23 @@
+<!--Name: Carly Cappagli
+	Discription: -->
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Main</title>
+	<link rel="stylesheet" href="style.css">
+	<script src="functions.js"></script>
+</head>
+<body>
+	<script>
+		setDoc(document.getElementById("main"), document.getElementById("stats"));
+		var lvl = <?= $_SESSION['lvl'] ?>
+		var exp = <?= $_SESSION['exp'] ?>
+		var hp = <?= $_SESSION['hp'] ?>
+		var story = <?= $_SESSION['story'] ?>
+		var loc = 0;
+	</script>
+	<h2>Adventure Game</h2>
+	<p id="stats"></p>
+	<div id="main"></div>
+</body>
+</html>
