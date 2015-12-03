@@ -8,16 +8,18 @@
 	<script src="functions.js"></script>
 </head>
 <body>
-	<script>
-		setDoc(document.getElementById("main"), document.getElementById("stats"));
-		var lvl = <?= $_SESSION['lvl'] ?>
-		var exp = <?= $_SESSION['exp'] ?>
-		var hp = <?= $_SESSION['hp'] ?>
-		var story = <?= $_SESSION['story'] ?>
-		var loc = 0;
-	</script>
 	<h2>Adventure Game</h2>
-	<p id="stats"></p>
-	<div id="main"></div>
+	<div id="stats"></div>
+	<div id="main"><p>this should have text here</p></div>
+	<script>
+		if(<?= session_status() == PHP_SESSION_ACTIVE ?>){
+			setDoc(document.getElementById("main"), document.getElementById("stats"));
+			setStats(<?= $_SESSION['lvl'] ?>, <?= $_SESSION['exp'] ?>, <?= $_SESSION['hp'] ?>, <?= $_SESSION['story'] ?>);
+			goPlace('Town');
+		}
+		else{
+			document.getElementById("main").innerHTML = "<h2>YOU ARE NOT LOGGED IN!!!!!</h2>";
+		}
+	</script>
 </body>
 </html>
