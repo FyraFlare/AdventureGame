@@ -11,9 +11,11 @@
 	<h2>Adventure Game</h2>
 	<div id="stats"></div>
 	<div id="main"><p>this should have text here</p></div>
+	<div id="battle"><p>fight info here</p></div>
+	<div id="options"><p>buttons go here</p></div>
 	<script>
 		if(<?= session_status() == PHP_SESSION_ACTIVE ?>){
-			setDoc(document.getElementById("main"), document.getElementById("stats"));
+			setDoc(document.getElementById("main"), document.getElementById("stats"), document.getElementById("battle"), document.getElementById("options"));
 			setStats(<?= $_SESSION['lvl'] ?>, <?= $_SESSION['exp'] ?>, <?= $_SESSION['hp'] ?>, <?= $_SESSION['story'] ?>);
 			goPlace('Town');
 		}
