@@ -1,4 +1,4 @@
-<!--Name: Carly Cappagli
+<!--Name: Carly Cappagli, Louise Johansson
 	Discription:  -->
 <!DOCTYPE html>
 <html>
@@ -7,18 +7,30 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h2>Login</h2>
+	<h2 id="loginTitle">Login</h2>
+	<div id="login">
 	<form action="http://localhost/AdventureGame/login.php" method="post">
-		User Name <input type="text" id="username" name="username"  required /> <br><br>
-		Password <input type="password" id="pass" name="pass" required/>
+		User Name: <input type="text" id="username" name="username"  required> <br><br>
+		Password:   <input type="password" id="pass" name="pass" required>
 		<input type="hidden" name="lorr" value="Login">
-		<input type="submit" id="lButton" name="submit" value="Login"/>
+		<input type="submit" id="lButton" name="submit" value="Login">
 	</form>
+	</div>
+	<div id="register">
+	Don't have an account? Register now!
 	<form action="http://localhost/AdventureGame/register.html" method="post">
-		<input type="submit" id="rButton" name="rButton" value="Register"/>
+		<input type="submit" id="rButton" name="rButton" value="Register">
 	</form>
+	</div>
+	<br>
+	<div id="story">
 	<p>
-		Story
-	</p>
+		<h2 style="font-family:cinnamonCake;font-weight:bold;text-align:center;font-size:35px;">Story</h2>
+		Welcome to Adventure Game! In this game you are a brave adventurer.
+		While traveling, you stumble across the town of Shadows. The residents
+		of Shadows are all weaklings. The town of Shadows is surrounded by a
+		large, dark forest. Your job is to rid that forest of evil, lurking monsters! Quest on, brave adventurer!
+		</p>
+	</div>
 </body>
 </html>

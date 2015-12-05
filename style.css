@@ -1,0 +1,71 @@
+body {
+  background-color:#98D9C6;//#02A675;
+  background-image: url(background_image.png);
+  background-repeat:y;
+  color: #0E392C;
+  font-family:sans-serif;
+  font-size:40px;
+}
+@font-face{
+  font-family:cinnamonCake;
+  src: url(cinnamon_cake.ttf);
+}
+#loginTitle {
+  margin:auto;
+  text-align:center;
+  font-size:90px;
+  font-family:cinnamonCake;
+}
+#login {
+  border-style:solid;
+  border-width:4px;
+  border-color:#4A8056;
+  background-color:#95CAA1;
+  border-radius:25px;
+  padding:10px;
+  font-family:cinnamonCake;
+  font-size:30px;
+  margin:auto;
+  width:30%;
+  position:relative;
+}
+#register {
+  border-style:solid;
+  border-width:2px;
+  border-color:#08789D;
+  padding:10px;
+  font-family:arial;
+  font-size:17px;
+  font-weight:bold;
+  color:#03546F;
+  background-color:#98C6D5;
+  width:200px;
+  float:left;
+  text-align:left;
+  position:absolute;
+  top:50px;
+  left:50px;
+}
+#username {
+  font-family:sans-serif;
+  font-size:20px;
+}
+#password {
+  font-size:20px;
+}
+
+#story{
+  font-family:cinnamonCake;
+  font-size:35px;
+  text-align:center;
+  border-style:solid;
+  border-color:#95CAA1;
+  border-radius:2px;
+  background-color:#95CAA1;
+  padding:5px;
+  width:50%;
+  text-align:left;
+  border-radius:20px;
+  margin-left:auto;
+  margin-right:auto;
+}
