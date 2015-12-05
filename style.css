@@ -2,29 +2,29 @@ body {
   background-color:#98D9C6;//#02A675;
   background-image: url(background_image.png);
   background-repeat:y;
-  color: #0E392C;
+  color: #FFD580;
   font-family:sans-serif;
-  font-size:40px;
+  font-size:30px;
 }
 @font-face{
-  font-family:cinnamonCake;
-  src: url(cinnamon_cake.ttf);
+  font-family:arkFont;
+  src: url(fairytale.ttf);
 }
 #loginTitle {
   margin:auto;
   text-align:center;
-  font-size:90px;
-  font-family:cinnamonCake;
+  font-size:80px;
+  font-family:arkFont;
 }
 #login {
-  border-style:solid;
-  border-width:4px;
-  border-color:#4A8056;
-  background-color:#95CAA1;
-  border-radius:25px;
+  border-style:double;
+  border-width:8px;
+  border-color:#B3AFA1;
+  background-color:#565654;
+  border-radius:20px;
   padding:10px;
-  font-family:cinnamonCake;
-  font-size:30px;
+  font-family:arkFont;
+  font-size:40px;
   margin:auto;
   width:30%;
   position:relative;
@@ -55,17 +55,17 @@ body {
 }
 
 #story{
-  font-family:cinnamonCake;
-  font-size:35px;
+  font-family:arkFont;
+  font-size:40px;
   text-align:center;
-  border-style:solid;
-  border-color:#95CAA1;
-  border-radius:2px;
-  background-color:#95CAA1;
-  padding:5px;
+  border-style:double;
+  border-width:8px;
+  border-color:#B3AFA1;
+  border-radius:20px;
+  background-color:#565654;
+  padding:10px;
   width:50%;
   text-align:left;
-  border-radius:20px;
   margin-left:auto;
   margin-right:auto;
 }
