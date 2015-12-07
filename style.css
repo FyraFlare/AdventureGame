@@ -10,11 +10,12 @@ body {
   font-family:fairytale;
   src: url(fairytale.ttf);
 }
-#loginTitle {
+#title {
   margin:auto;
   text-align:center;
   font-size:80px;
   font-family:fairytale;
+  padding:20px;
 }
 #login {
   border-style:double;
@@ -50,7 +51,7 @@ body {
   font-family:sans-serif;
 }
 
-#story{
+#mainArea{
   font-family:fairytale;
   font-size:40px;
   text-align:center;
@@ -64,4 +65,54 @@ body {
   text-align:left;
   margin-left:auto;
   margin-right:auto;
+}
+
+#main{
+  font-family:fairytale;
+  font-size:40px;
+  text-align:center;
+  border-style:double;
+  border-width:8px;
+  border-color:#B3AFA1;
+  border-radius:20px;
+  background-color:#565654;
+  padding:8px;
+  width:50%;
+  text-align:left;
+  margin-left:auto;
+  margin-right:auto;
+  clear:both;
+}
+
+#stats{
+  border-style:double;
+  border-width:8px;
+  border-color:#B3AFA1;
+  border-radius:20px;
+  background-color:#565654;
+  padding:5px;
+  width:9%;
+  margin-left:150px;
+  position:fixed;
+}
+
+#battle{
+  font-family:fairytale;
+  font-size:40px;
+  text-align:center;
+  border-style:double;
+  border-width:8px;
+  border-color:#B3AFA1;
+  border-radius:20px;
+  background-color:#565654;
+  padding:10px;
+  width:50%;
+  text-align:left;
+  margin-left:auto;
+  margin-right:auto;
+  clear:both;
+}
+
+#options{
+
 }

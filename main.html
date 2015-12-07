@@ -8,12 +8,12 @@
 	<script src="main.js"></script>
 </head>
 <body>
-	<h2>Adventure Game</h2>
+	<h2 id="title">Adventure Game</h2>
 	<div id="stats"><ul><li>LVL: lvl </li><li>HP: hp </li><li>EXP: exp </li></ul></div>
-	<div id="main"><p>Discription of area here</p></div>
+	<div id="main"><p>Description of area here</p></div><br>
 	<div id="battle"><p>battle log<br>fight info goes here</p></div>
 	<div id="options"><button class="button">A button.</button> <button class="button">Another button.</button></div>
-	<script>
+	<!--<script>
 		if(<?= session_status() == PHP_SESSION_ACTIVE ?>){
 			setDoc(document.getElementById("main"), document.getElementById("stats"), document.getElementById("battle"), document.getElementById("options"));
 			setStats(<?= $_SESSION['lvl'] ?>, <?= $_SESSION['exp'] ?>, <?= $_SESSION['hp'] ?>, <?= $_SESSION['story'] ?>);
@@ -22,6 +22,6 @@
 		else{
 			document.getElementById("main").innerHTML = "<h2>YOU ARE NOT LOGGED IN!!!!!</h2>";
 		//}
-	</script>
+	</script>-->
 </body>
 </html>
