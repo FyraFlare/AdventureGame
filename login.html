@@ -5,11 +5,12 @@
 <head>
 	<title>Login</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
 </head>
 <body>
 	<h2 id="loginTitle">Login</h2>
 	<div id="login">
-	<form action="http://localhost/AdventureGame/login.php" method="post">
+	<form onsubmit="login()">
 		User Name: <input type="text" id="username" name="username"  required> <br><br>
 		Password:   <input type="password" id="pass" name="pass" required>
 		<input type="hidden" name="lorr" value="Login">
@@ -29,7 +30,7 @@
 		While traveling, you stumble across the town of Shadows. The residents
 		of Shadows are all weaklings. The town of Shadows is surrounded by a
 		large, dark forest. Your job is to rid that forest of evil, lurking monsters! Quest on, brave adventurer!
-		</p>
+	</p>
 	</div>
 </body>
 </html>

@@ -13,6 +13,19 @@ var monster;
 var ehp;
 var elvl;
 
+function login(user, pass){
+	var args = {submit: 'Login', username: user, pass: pass};
+	$http.post("login.php", args).then(function(data){});
+}
+
+function register(user, pass1, pass2){
+	var args = {submit: 'Register', username: user, pass: pass1};
+	if(pass1 != pass2){
+		document.getElementById('error').innerHTML = 'Passwords do not match';
+	}
+	$http.post("login.php", args).then(function(data){});
+}
+
 function setDoc(documentM, documentS, documentB, documentO){
 	main = documentM;
 	stats = documentS;
