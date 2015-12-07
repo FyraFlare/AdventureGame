@@ -67,7 +67,7 @@ function heal(){
 
 function encounter(){
 	//monster = monster_found_in_loc;
-	elvl = lvl + (Math.floor((Math.random()*3) - 1);
+	elvl = lvl + (Math.floor((Math.random()*3) - 1));
 	if(elvl < 1){
 		elvl = 1;
 	}
@@ -90,7 +90,7 @@ function atack(){
 }
 
 function defend(){
-	var hit = Math.floor((Math.random()*2);
+	var hit = Math.floor((Math.random()*2));
 	if(hit < 1){
 		takeDamage('p', Math.floor(atackPow('e')/2));
 	}
@@ -100,7 +100,7 @@ function defend(){
 }
 
 function atackPow(t){
-	var hit = Math.floor((Math.random()*2);
+	var hit = Math.floor((Math.random()*2));
 	if(t == 'p'){
 		l = lvl;
 		battle.innerHTML += 'You slash into the '+monster+' with your sword.<br>';

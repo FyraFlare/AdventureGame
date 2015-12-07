@@ -64,15 +64,34 @@
 
 	function storeStats(){
 		global $conn;
-		foreach($check as $row){
-			$_SESSION['lvl'] = $row['level'];
-			$_SESSION['exp'] = $row['exp'];
-			$_SESSION['hp'] = $row['health'];
-			$_SESSION['story'] = $row['story'];
-		}
 		$com = "UPDATE users SET level='".$_SESSION['lvl']."', exp='".
 			$_SESSION['exp']."'health='".$_SESSION['hp']."', story='".
 			$_SESSION['story']."' WHERE username='".$name."';";
 		$check = $conn->query ($com);
+	}
+
+	function getMonster($loc){
+		$count = $conn->query ("SELECT COUNT(*) FROM monsters WHERE location='".$loc."';");
+		print_r($count);
+		//$chosen = rand(0, $count-1);
+		//$check = $conn->query ("SELECT * FROM monsters WHERE location='".$loc."';");
+		//$counter = 0;
+		//foreach($check as $row){
+		//	if($counter == $chosen){
+		//		return $row['name'];
+		//	}
+		//	$counter++;
+		//}
+	}
+
+	function getAtackText($mons, $strength){
+		$check = $conn->query ("SELECT ".$strength." FROM monsters WHERE name='".$mons."';");
+		foreach($check as $row){
+			$atk = $row[$strength];
+		}
+		$check = $conn->query ("SELECT text FROM atacks WHERE atack='".$atk."';");
+		foreach($check as $row){
+			return $row['text'];
+		}
 	}
 ?>
