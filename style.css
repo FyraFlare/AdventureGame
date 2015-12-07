@@ -3,18 +3,18 @@ body {
   background-image: url(background_image.png);
   background-repeat:y;
   color: #FFD580;
-  font-family:sans-serif;
+  font-family:fairytale;
   font-size:30px;
 }
 @font-face{
-  font-family:arkFont;
+  font-family:fairytale;
   src: url(fairytale.ttf);
 }
 #loginTitle {
   margin:auto;
   text-align:center;
   font-size:80px;
-  font-family:arkFont;
+  font-family:fairytale;
 }
 #login {
   border-style:double;
@@ -23,7 +23,7 @@ body {
   background-color:#565654;
   border-radius:20px;
   padding:10px;
-  font-family:arkFont;
+  font-family:fairytale;
   font-size:40px;
   margin:auto;
   width:30%;
@@ -48,14 +48,10 @@ body {
 }
 #username {
   font-family:sans-serif;
-  //font-size:20px;
-}
-#password {
-  font-size:20px;
 }
 
 #story{
-  font-family:arkFont;
+  font-family:fairytale;
   font-size:40px;
   text-align:center;
   border-style:double;
