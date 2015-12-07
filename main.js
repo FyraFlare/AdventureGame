@@ -13,8 +13,8 @@ var monster;
 var ehp;
 var elvl;
 
-function login(user, pass){
-	var args = {submit: 'Login', username: user, pass: pass};
+function login(user, pass1){
+	var args = {submit: 'Login', username: user, pass: pass1};
 	$http.post("login.php", args).then(function(data){});
 }
 
@@ -76,16 +76,20 @@ function dispStats(){
 
 function heal(){
 	hp = lvl * 100;
+	dispStats();
 }
 
 function encounter(){
-	//monster = monster_found_in_loc;
 	elvl = lvl + (Math.floor((Math.random()*3) - 1));
 	if(elvl < 1){
 		elvl = 1;
 	}
 	ehp = elvl*20;
-	battle.innerHTML = 'You encountered a '+monster+' in the '+loc+'.<br>';
+	var args = {want: 'monster', place: loc};
+	$http.post("wanted.php", args).then(function(data){
+		monster = data;
+		battle.innerHTML = 'You encountered a '+monster+' in the '+loc+'.<br>';
+	});
 	options.innerHTML = '<button class="button" onclick="atack()">Atack</button>';
 	options.innerHTML += '<button class="button" onclick="defend()">Defend</button>';
 }
@@ -113,15 +117,17 @@ function defend(){
 }
 
 function atackPow(t){
-	var hit = Math.floor((Math.random()*2));
+	var hit = Math.floor((Math.random()*2))+1;
 	if(t == 'p'){
 		l = lvl;
 		battle.innerHTML += 'You slash into the '+monster+' with your sword.<br>';
 	}
 	else{
 		l = elvl;
-		//TODO
-		var disc = discription_from_table;
+		var args = {want: 'atack', place: loc};
+		$http.post("wanted.php", args).then(function(data){
+			var disc = data;
+		});
 		battle.innerHTML += 'The '+monster+disc;
 	}
 	hit = hit*l+5;
@@ -166,4 +172,30 @@ function gainXP(g){
 		lvl++;
 		battle.innerHTML += 'You have reached level '+lvl+'!<br>';
 	}
+}
+
+function loadData(){
+	var args = {want: 'stat', stat: 'lvl'};
+	$http.post("wanted.php", args).then(function(data){
+		lvl = data;
+		var args = {want: 'stat', stat: 'hp'};
+		$http.post("wanted.php", args).then(function(data){
+			hp = data;
+			var args = {want: 'stat', stat: 'exp'};
+			$http.post("wanted.php", args).then(function(data){
+				exp = data;
+				dispStats();
+			});
+		});
+	});
+	var args = {want: 'stat', stat: 'story'};
+	$http.post("wanted.php", args).then(function(data){
+		story = data;
+	});
+	goPlace('Town');
+}
+
+function saveData(){
+	var args = {want: 'save', level: lvl, health: hp, xp: exp, sty: story};
+	$http.post("wanted.php", args).then(function(data){});
 }

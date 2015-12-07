@@ -13,15 +13,17 @@
 	<div id="main"><p>Description of area here</p></div><br>
 	<div id="battle"><p>battle log<br>fight info goes here</p></div>
 	<div id="options"><button class="button">A button.</button> <button class="button">Another button.</button></div>
-	<!--<script>
-		if(<?= session_status() == PHP_SESSION_ACTIVE ?>){
-			setDoc(document.getElementById("main"), document.getElementById("stats"), document.getElementById("battle"), document.getElementById("options"));
-			setStats(<?= $_SESSION['lvl'] ?>, <?= $_SESSION['exp'] ?>, <?= $_SESSION['hp'] ?>, <?= $_SESSION['story'] ?>);
-			goPlace('Town');
+	<script>
+		var args = {want: 'session'};
+		$http.post("wanted.php", args).then(function(data){
+			if(data == 'good'){
+				setDoc(document.getElementById("main"), document.getElementById("stats"), document.getElementById("battle"), document.getElementById("options"));
+				loadData();
+			}
+			else{
+				document.getElementById("main").innerHTML = "<h2>YOU ARE NOT LOGGED IN!!!!!</h2>";
+			}
 		}
-		else{
-			document.getElementById("main").innerHTML = "<h2>YOU ARE NOT LOGGED IN!!!!!</h2>";
-		//}
-	</script>-->
+	</script>
 </body>
 </html>
