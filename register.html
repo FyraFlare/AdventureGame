@@ -7,14 +7,16 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-	<h2>Register</h2>
+	<div id="loginTitle">Register</div>
+	<div id="login">
 	<form action="http://localhost/AdventureGame/login.php" method="post">
-		User Name <input type="text" id="username" name="username"  required /> <br><br>
-		Password <input type="password" id="pass" name="pass" required/><br><br>
-		Confirm Password <input type="password" id="pass" name="pass" required/>
+		User Name: <input type="text" id="username" name="username"  required /> <br><br>
+		Password: <input type="password" id="pass" name="pass" required/><br><br>
+		Confirm Password: <input type="password" id="pass" name="pass" required/>
 		<input type="hidden" name="lorr" value="Register">
 		<input type="submit" id="lButton" name="submit" value="Register"/>
 	</form>
+	</div>
 	<div id="error"></div>
 </body>
 </html>
