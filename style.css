@@ -1,7 +1,7 @@
 body {
-  background-color:#98D9C6;
+  background-color:#98D9C6;//#02A675;
   background-image: url(background_image.png);
-  background-repeat: repeat-y;
+  background-repeat:y;
   color: #FFD580;
   font-family:fairytale;
   font-size:30px;
@@ -113,6 +113,6 @@ body {
   clear:both;
 }
 
-.button{
-  background-color:;
+#options{
+
 }

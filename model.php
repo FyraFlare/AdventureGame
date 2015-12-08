@@ -63,7 +63,12 @@
 
 	function logout(){
 		unset($_SESSION['user']);
+		unset($_SESSION['lvl']);
+		unset($_SESSION['exp']);
+		unset($_SESSION['hp']);
+		unset($_SESSION['story']);
 		setcookie('PHPSESSID', null, -1, '/');
+		header("Location: login.html");
 	}
 
 	function storeStats(){
