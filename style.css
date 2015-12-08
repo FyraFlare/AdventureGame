@@ -1,11 +1,10 @@
 body {
   background-color:#98D9C6;
   background-image: url(background_image.png);
-  background-repeat: repeat-y;
+  background-repeat: repeat;
   color: #FFD580;
-  font-family:fairytale;
-  font-size:30px;
 }
+
 @font-face{
   font-family:fairytale;
   src: url(fairytale.ttf);
@@ -29,6 +28,13 @@ body {
   margin:auto;
   width:30%;
   position:relative;
+}
+#logout {
+  float:right;
+  position:absolute;
+  top:10px;
+  right:10px;
+  clear:left;
 }
 #register {
   border-style:solid;
@@ -54,7 +60,6 @@ body {
 #mainArea{
   font-family:fairytale;
   font-size:40px;
-  text-align:center;
   border-style:double;
   border-width:8px;
   border-color:#B3AFA1;
@@ -70,7 +75,6 @@ body {
 #main{
   font-family:fairytale;
   font-size:40px;
-  text-align:center;
   border-style:double;
   border-width:8px;
   border-color:#B3AFA1;
@@ -79,9 +83,10 @@ body {
   padding:8px;
   width:50%;
   text-align:left;
-  margin-left:auto;
+  margin-left:460px;
   margin-right:auto;
-  clear:both;
+  position:relative;
+  overflow:hidden;
 }
 
 #stats{
@@ -89,17 +94,18 @@ body {
   border-width:8px;
   border-color:#B3AFA1;
   border-radius:20px;
+  font-family:fairytale;
+  font-size:25px;
   background-color:#565654;
-  padding:5px;
   width:9%;
   margin-left:150px;
-  position:fixed;
+  position:relative;
+  float:left;
 }
 
 #battle{
   font-family:fairytale;
   font-size:40px;
-  text-align:center;
   border-style:double;
   border-width:8px;
   border-color:#B3AFA1;
@@ -108,11 +114,77 @@ body {
   padding:10px;
   width:50%;
   text-align:left;
-  margin-left:auto;
+  margin-left:460px;
   margin-right:auto;
-  clear:both;
+  position:relative;
+  clear:left;
+  overflow:hidden;
 }
 
+#options{
+  margin-left:auto;
+  margin-right:460px;
+  margin-top:10px;
+  float:right;
+}
 .button{
-  background-color:;
+  display: inline-block;
+  cursor:pointer;
+  background-color:#5b5b58;
+  text-align:center;
+  color:#FFD580;
+  padding:10px;
+  font-family:fairytale;
+  font-size:30px;
+  border:none;
+  border-radius:10px;
+  box-shadow:0 5px #999;
+}
+
+.button:hover {
+  background-color:#3B4B5C;
+  color:#9FB6CF;
+}
+
+.button:active {
+  background-color:#3B4B5C;
+  box-shadow:0 5px #666;
+  transform: translateY(4px);
+}
+
+.logoutButton {
+  display: inline-block;
+  cursor:pointer;
+  background-color:#98C6D5;
+  text-align:center;
+  color:#3B4B5C;
+  padding:15px;
+  font-family:fairytale;
+  font-size:35px;
+  border:none;
+  border-radius:10px;
+  box-shadow:0 5px #999;
+}
+
+input[type=text] {
+  padding:5px;
+  border:2px solid #8A8679;
+  background-color:#B3AFA1;
+}
+
+input[type=password] {
+  padding:5px;
+  border:2px solid #8A8679;
+  background-color:#B3AFA1;
+}
+
+input[type=submit] {
+  padding:5px;
+  border:2px solid #8A8679;
+  padding:5px;
+  border-radius:15px;
+  font-family:fairytale;
+  font-size:25px;
+  color:#574D2A;
+  background-color:#D6D6D4;
 }
