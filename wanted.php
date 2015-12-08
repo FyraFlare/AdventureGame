@@ -33,6 +33,9 @@
 		$_SESSION['story'] = $_POST["sty"];
 		storeStats();
 	}
+	elseif($want == "logout"){
+		logout();
+	}
 	else{
 		echo "not working";
 	}

@@ -13,16 +13,29 @@ var monster;
 var ehp;
 var elvl;
 
-function login(user, pass1){
-	var args = {submit: 'Login', username: user, pass: pass1};
-	$http.post("login.php", args).then(function(data){});
+function login(){
+	var user = document.getElementById('username').value;
+	var pass = document.getElementById('pass').value;
+	var args = {submit: 'Login', username: user, pass: pass};
+	$http.post("login.php", args).then(function(data){
+		//TODO
+	});
 }
 
-function register(user, pass1, pass2){
-	var args = {submit: 'Register', username: user, pass: pass1};
+function logout(){
+	var args = {want: 'logout'};
+	$http.post("wanted.php", args).then(function(data){});
+}
+
+function register(){
+	var pass1 = document.getElementById('pass1').value;
+	var pass2 = document.getElementById('pass2').value;
 	if(pass1 != pass2){
 		document.getElementById('error').innerHTML = 'Passwords do not match';
+		console.log('passwords do not match');
+		return;
 	}
+	var args = {submit: 'Register', username: document.getElementById('username').value, pass: pass1};
 	$http.post("login.php", args).then(function(data){});
 }
 
@@ -37,6 +50,7 @@ function goPlace(place){
 	loc = place;
 	if(place == 'Town'){
 		main.innerHTML = "<p>Welcome to town.</p><br>";
+		dispStory();
 		options.innerHTML = '<button class="button" onclick="saveData()">Save</button>';
 		options.innerHTML += '<button class="button" onclick="go("Healer")">Visit the healer.</button>';
 		//options.innerHTML += '<button class="button" onclick="go("Shop")">Go to shop.</button>';
@@ -124,7 +138,7 @@ function atackPow(t){
 	}
 	else{
 		l = elvl;
-		var args = {want: 'atack', place: loc};
+		var args = {want: 'atack', str: hit};
 		$http.post("wanted.php", args).then(function(data){
 			var disc = data;
 		});
@@ -204,8 +218,67 @@ function dispStory(){
 	if(story == 0){
 		text = 'Begining story/quest info';
 	}
-	else(){
+	else{
 		text = 'finished story stuff'
 	}
 	main.innerHTML += text;
 }
+
+
+//Moved from other file
+
+var $http = (function (){
+    'use strict';
+
+    function ajax(method, uri, args){
+        var promise = new Promise(function(resolve, reject){
+            var req = new XMLHttpRequest();
+            var url =  uri;
+            var parameters = '';
+            req.open(method, url);
+
+            if(args && (method === 'POST' || method === 'PUT')){
+                req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                if(args && typeof args === 'object'){
+                    for(var k in args){
+                        parameters+= k + '=' + args[k] + '&';
+                    }
+                }
+            }
+            req.send(parameters);
+            req.onload = function (){
+                if(req.status >= 200 && req.status < 300){
+                    resolve(req.response);
+                }
+                else{
+                    reject(req.statusText);
+                }
+            };
+            req.onerror = function(){
+                reject(req.statusText);
+            };
+        });
+        return promise;
+    }
+
+    return {
+        get : function(uri, args, callback){
+            if (args && typeof args === 'function'){
+                callback = args;
+            }
+            if(callback && typeof callback === 'function'){
+                return ajax('GET', uri, args).then(callback)
+            }
+            return ajax('GET', uri, args);
+        },
+        post : function(uri, args, callback){
+            if (args && typeof args === 'function'){
+                callback = args;
+            }
+            if(callback && typeof callback === 'function'){
+                return ajax('POST', uri, args).then(callback)
+            }
+            return ajax('POST', uri, args);
+        },
+    };
+}());
