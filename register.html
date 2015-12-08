@@ -5,11 +5,12 @@
 <head>
 	<title>Register</title>
 	<link rel="stylesheet" href="style.css">
+	<script src="main.js"></script>
 </head>
 <body>
 	<h2 id="title">Register</h2>
 	<div id="login">
-	<form action="http://localhost/AdventureGame/login.php" method="post">
+	<form onsubmit="login()">
 		User Name: <input type="text" id="username" name="username"  required /> <br><br>
 		Password: <input type="password" id="pass" name="pass" required/><br><br>
 		Confirm Password: <input type="password" id="pass" name="pass" required/>
