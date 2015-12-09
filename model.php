@@ -70,12 +70,8 @@
 
 	function logout(){
 		session_start();
-		unset($_SESSION['user']);
-		unset($_SESSION['lvl']);
-		unset($_SESSION['exp']);
-		unset($_SESSION['hp']);
-		unset($_SESSION['story']);
-		setcookie('PHPSESSID', null, -1, '/');
+		session_unset();
+		session_destroy();
 	}
 
 	function storeStats(){

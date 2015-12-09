@@ -20,7 +20,8 @@
 		echo $_SESSION[$_POST['stat']];
 	}
 	elseif($want == "session"){
-		if(session_status() == PHP_SESSION_NONE){
+		session_start();
+		if($_SESSION['user'] != null){
 			echo 'good';
 		}
 		else{
@@ -37,6 +38,7 @@
 	}
 	elseif($want == "logout"){
 		logout();
+		echo 'loged out';
 	}
 	else{
 		echo "not working";

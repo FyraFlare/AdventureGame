@@ -30,8 +30,10 @@ function login(){
 
 function logout(){
 	var args = {want: 'logout'};
-	$http.post("wanted.php", args).then(function(data){});
-	window.location.assign("http://localhost/AdventureGame/login.html");
+	$http.post("wanted.php", args).then(function(data){
+		console.log(data);
+		window.location.assign("http://localhost/AdventureGame/login.html");
+	});
 }
 
 function register(){
