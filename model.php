@@ -20,13 +20,13 @@
 		$stmt ->execute();
 		$result = $stmt->fetchAll();
 		$count = 0;
-		foreach($check as $row){
+		foreach($result as $row){
 			$count++;
 		}
 		if($count < 1){
 			$com = "INSERT INTO users VALUES ('".$name."', 1, 0, 100, 0, '".$hash."');";
-			$stmt -> prepare($com);
-			$check = $stmt ->execute();
+			$stmt = $conn -> prepare($com);
+			$stmt ->execute();
 			echo 'good';
 		}
 		else{
@@ -89,11 +89,15 @@
 	}
 
 	function getMonster($loc){
+		session_start();
 		global $conn;
-		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE location='".$loc."';");
+		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE location='".$loc."' AND min<='".$_SESSION['lvl']."';");
 		$stmt ->execute();
 		$result = $stmt->fetchAll();
-		$c = count($result);
+		$c = 0;
+		foreach($result as $row){
+			$c++;
+		}
 		$chosen = rand(0, $c-1);
 		$counter = 0;
 		foreach($result as $row){

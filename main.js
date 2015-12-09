@@ -191,7 +191,7 @@ function die(){
 }
 
 function kill(){
-	var gain = (elvl - lvl + 2) * 5;
+	var gain = (elvl + 2) * 5;
 	gainXP(gain);
 	battle.innerHTML += 'You killed the '+monster+'.<br>';
 	options.innerHTML = '<button class="button" onclick="endEncounter()">Contine</button>';
