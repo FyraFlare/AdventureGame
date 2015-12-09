@@ -64,7 +64,6 @@ function goPlace(place){
 	if(place == 'Town'){
 		main.innerHTML = "<p>Welcome to the town of Shadows.</p><br>";
 		dispStory();
-		console.log('finished dispStory');
 		options.innerHTML = '<button class="button" onclick="saveData()">Save</button>';
 		options.innerHTML += '<button class="button" onclick="goPlace('+"'Healer'"+')">Visit the healer.</button>';
 		//options.innerHTML += '<button class="button" onclick="goPlace('+"'Shop'"+')">Go to shop.</button>';
@@ -131,7 +130,9 @@ function endEncounter(){
 function atack(){
 	takeDamage('e', atackPow('p'));
 	var dmg = atackPow('e', ' and hits.<br>');
-	takeDamage('p', dmg);
+	if(ehp > 0){
+		takeDamage('p', dmg);
+	}
 }
 
 function defend(){
@@ -165,7 +166,7 @@ function atackPow(t, r){
 
 function takeDamage(t, d){
 	if(t == 'p'){
-		battle.innerHTML += 'You took '+d+' damage.<br>';
+		//battle.innerHTML += 'You took '+d+' damage.<br>';
 		hp -= d;
 		h = hp;
 		dispStats();
@@ -207,6 +208,7 @@ function kill(){
 
 function gainXP(g){
 	exp += g;
+	battle.innerHTML += 'You gained '+g+' exp.<br>';
 	if(exp >= lvl*100){
 		exp -= lvl*100;
 		lvl++;
@@ -235,6 +237,7 @@ function loadData(){
 		story = parseInt(data);
 		goPlace('Town');
 	});
+	battle.innerHTML = '';
 }
 
 function saveData(){
@@ -247,7 +250,6 @@ function saveData(){
 
 function dispStory(){
 	var text;
-	console.log('in dispStory');
 	if(story == 0){
 		text = 'You enter the town of Shadows. It is a small town, with only a handful of residents. One of them approaches you and says "Oh great adventurer! Please save us! '
 		+ 'Our town is surrounded by a dark forest which has been taken over by many beasts and monsters! The townspeople are too weak to fight. You must help us! However, the forest '
