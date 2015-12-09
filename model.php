@@ -16,7 +16,7 @@
 		$name = htmlspecialchars($name);
 		$pass = htmlspecialchars($pass);
 		$hash = password_hash($pass, PASSWORD_DEFAULT);
-		$stmt -> prepare("SELECT * FROM users WHERE username='".$name."';");
+		$stmt = $conn -> prepare("SELECT * FROM users WHERE username='".$name."';");
 		$check = $stmt ->execute();
 		$count = 0;
 		foreach($check as $row){
@@ -37,27 +37,33 @@
 		global $conn;
 		$name = htmlspecialchars($name);
 		$pass = htmlspecialchars($pass);
-		$hash = password_hash($pass, PASSWORD_DEFAULT);
-		$stmt -> prepare("SELECT * FROM users WHERE username='".$name."';");
-		$check = $stmt ->execute();
-		foreach($check as $row){
-			$psw = $row['password'];
-		}
-		if(password_verify($pass, $psw)){
-			session_start();
-			$_SESSION['user'] = $name;
-			$stmt -> prepare("SELECT * FROM users WHERE username='".$name."';");
-			$check = $stmt ->execute();
-			foreach($check as $row){
-				$_SESSION['lvl'] = $row['level'];
-				$_SESSION['exp'] = $row['exp'];
-				$_SESSION['hp'] = $row['health'];
-				$_SESSION['story'] = $row['story'];
+		$stmt = $conn -> prepare("SELECT password FROM users WHERE username='".$name."';");
+		$stmt ->execute();
+		$result = $stmt->fetchAll();
+		if(count($result) == 1){
+			foreach($result as $row){
+				$psw = $row['password'];
 			}
-			header("Location: main.html");
+			if(password_verify($pass, $psw)){
+				session_start();
+				$_SESSION['user'] = $name;
+				$stmt = $conn -> prepare("SELECT * FROM users WHERE username='".$name."';");
+				$check = $stmt ->execute();
+				$result = $stmt->fetchAll();
+				foreach($result as $row){
+					$_SESSION['lvl'] = $row['level'];
+					$_SESSION['exp'] = $row['exp'];
+					$_SESSION['hp'] = $row['health'];
+					$_SESSION['story'] = $row['story'];
+				}
+				echo 'good';
+			}
+			else{
+				echo 'Invalid username or password';
+			}
 		}
 		else{
-			header("Location: login.html");
+			echo 'Invalid username or password';
 		}
 	}
 
@@ -81,7 +87,7 @@
 	}
 
 	function getMonster($loc){
-		$stmt -> prepare("SELECT * FROM monsters WHERE location='".$loc."';");
+		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE location='".$loc."';");
 		$check = $stmt ->execute();
 		$array = $stmt->fetchAll(PDO::FETCH_ASSOC);
 		$cont = count($array);
@@ -98,12 +104,12 @@
 	}
 
 	function getAtackText($mons, $strength){
-		$stmt -> prepare("SELECT ".$strength." FROM monsters WHERE name='".$mons."';");
+		$stmt = $conn -> prepare("SELECT ".$strength." FROM monsters WHERE name='".$mons."';");
 		$check = $stmt ->execute();
 		foreach($check as $row){
 			$atk = $row[$strength];
 		}
-		$stmt -> prepare("SELECT text FROM atacks WHERE atack='".$atk."';");
+		$stmt = $conn -> prepare("SELECT text FROM atacks WHERE atack='".$atk."';");
 		$check = $stmt ->execute();
 		foreach($check as $row){
 			return $row['text'];
