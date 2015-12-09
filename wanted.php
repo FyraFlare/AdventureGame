@@ -16,7 +16,7 @@
 		echo register($_POST["mons"], $str);
 	}
 	elseif($want == "stat"){
-		echo $_POST[$_POST['stat']];
+		echo $_SESSION[$_POST['stat']];
 	}
 	elseif($want == "session"){
 		if(session_status() == PHP_SESSION_NONE){

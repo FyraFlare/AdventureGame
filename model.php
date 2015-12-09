@@ -17,7 +17,8 @@
 		$pass = htmlspecialchars($pass);
 		$hash = password_hash($pass, PASSWORD_DEFAULT);
 		$stmt = $conn -> prepare("SELECT * FROM users WHERE username='".$name."';");
-		$check = $stmt ->execute();
+		$stmt ->execute();
+		$result = $stmt->fetchAll();
 		$count = 0;
 		foreach($check as $row){
 			$count++;
@@ -26,10 +27,10 @@
 			$com = "INSERT INTO users VALUES ('".$name."', 1, 0, 100, 0, '".$hash."');";
 			$stmt -> prepare($com);
 			$check = $stmt ->execute();
-			header("Location: login.html");
+			echo 'good';
 		}
 		else{
-			header("Location: register.html");
+			echo 'Username taken';
 		}
 	}
 
@@ -74,7 +75,6 @@
 		unset($_SESSION['hp']);
 		unset($_SESSION['story']);
 		setcookie('PHPSESSID', null, -1, '/');
-		header("Location: login.html");
 	}
 
 	function storeStats(){
@@ -83,35 +83,35 @@
 			$_SESSION['exp']."'health='".$_SESSION['hp']."', story='".
 			$_SESSION['story']."' WHERE username='".$name."';";
 		$stmt -> prepare($com);
-		$check = $stmt ->execute();
+		$stmt ->execute();
 	}
 
 	function getMonster($loc){
 		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE location='".$loc."';");
-		$check = $stmt ->execute();
-		$array = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		$cont = count($array);
-		print_r($array);
-		//$chosen = rand(0, $count-1);
-		//$check = $conn->query ("SELECT * FROM monsters WHERE location='".$loc."';");
-		//$counter = 0;
-		//foreach($check as $row){
-		//	if($counter == $chosen){
-		//		return $row['name'];
-		//	}
-		//	$counter++;
-		//}
+		$stmt ->execute();
+		$result = $stmt->fetchAll();
+		$c = count($result);
+		$chosen = rand(0, $c-1);
+		$counter = 0;
+		foreach($result as $row){
+			if($counter == $chosen){
+				return $row['name'];
+			}
+			$counter++;
+		}
 	}
 
 	function getAtackText($mons, $strength){
-		$stmt = $conn -> prepare("SELECT ".$strength." FROM monsters WHERE name='".$mons."';");
-		$check = $stmt ->execute();
-		foreach($check as $row){
+		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE name='".$mons."';");
+		$stmt ->execute();
+		$result = $stmt->fetchAll();
+		foreach($result as $row){
 			$atk = $row[$strength];
 		}
-		$stmt = $conn -> prepare("SELECT text FROM atacks WHERE atack='".$atk."';");
-		$check = $stmt ->execute();
-		foreach($check as $row){
+		$stmt = $conn -> prepare("SELECT * FROM atacks WHERE atack='".$atk."';");
+		$stmt ->execute();
+		$result = $stmt->fetchAll();
+		foreach($result as $row){
 			return $row['text'];
 		}
 	}

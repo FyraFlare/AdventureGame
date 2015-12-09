@@ -12,6 +12,7 @@ var story;
 var monster;
 var ehp;
 var elvl;
+var progress;
 
 function login(){
 	var user = document.getElementById('username').value;
@@ -30,6 +31,7 @@ function login(){
 function logout(){
 	var args = {want: 'logout'};
 	$http.post("wanted.php", args).then(function(data){});
+	window.location.assign("http://localhost/AdventureGame/login.html");
 }
 
 function register(){
@@ -37,11 +39,17 @@ function register(){
 	var pass2 = document.getElementById('pass2').value;
 	if(pass1 != pass2){
 		document.getElementById('error').innerHTML = 'Passwords do not match';
-		console.log('passwords do not match');
 		return;
 	}
 	var args = {submit: 'Register', username: document.getElementById('username').value, pass: pass1};
-	$http.post("login.php", args).then(function(data){});
+	$http.post("login.php", args).then(function(data){
+		if(data == 'good'){
+			window.location.assign("http://localhost/AdventureGame/login.html");
+		}
+		else{
+			document.getElementById('error').innerHTML = data;
+		}
+	});
 }
 
 function setDoc(documentM, documentS, documentB, documentO){
@@ -181,6 +189,15 @@ function kill(){
 	gainXP(gain);
 	battle.innerHTML += 'You killed the '+monster+'.<br>';
 	options.innerHTML = '<button class="button" onclick="endEncounter()">Contine</button>';
+	if(story == 0){
+		counter++;
+	}
+	else if(story == 1 && monster == 'Ghost'){
+		counter++;
+	}
+	else if(story == 2 && monster == 'Witch'){
+		counter++;
+	}
 }
 
 function gainXP(g){
@@ -221,32 +238,43 @@ function saveData(){
 function dispStory(){
 	var text;
 	if(story == 0){
-		text = 'You enter the town of Shadows. It is a small town, with only a handful of residents. One of them approaches you and says "Oh great adventurer! Please save us! 
-		Our town is surrounded by a dark forest which has been taken over by many beasts and monsters! The townspeople are too weak to fight. You must help us! However, the forest
-		is cursed. If you try to leave before defeating a group of monsters, they will contact others in their group, and will be reinforced when you return. You must defeat them
-		in one trip!"<br>
-		Your goal: Defeat 4 monsters.';
+		text = 'You enter the town of Shadows. It is a small town, with only a handful of residents. One of them approaches you and says "Oh great adventurer! Please save us! '
+		+ 'Our town is surrounded by a dark forest which has been taken over by many beasts and monsters! The townspeople are too weak to fight. You must help us! However, the forest '
+		+ 'is cursed. If you try to leave before defeating a group of monsters, they will contact others in their group, and will be reinforced when you return. You must defeat them '
+		+ 'in one trip!"<br>'
+		+ 'Your goal: Defeat 4 monsters.';
+		if(counter >= 4){
+			story++;
+			counter = 0;
+		}
 	}
-
 	if(story == 1){
-		text = 'You return to Shadows. The resident, Harold, was waiting for you. "Oh thank you! You defeated the monsters! I know there are still more lurking out there, but we have
-		another bigger problem. Our town is currently cut off from all trade because of a group of dark ghosts terrorizing traders. Please, great adventurer, defeat these ghosts!"<br>
-		Your goal: Defeat 6 ghosts.';
+		text = 'You return to Shadows. The resident, Harold, was waiting for you. "Oh thank you! You defeated the monsters! I know there are still more lurking out there, but we have '
+		+ 'another bigger problem. Our town is currently cut off from all trade because of a group of dark ghosts terrorizing traders. Please, great adventurer, defeat these ghosts!"<br>'
+		+ 'Your goal: Defeat 6 ghosts.';
+		if(counter >= 6){
+			story++;
+			counter = 0;
+		}
 	}
-
 	if(story == 2){
-		text = 'After defeating the meddlesome ghosts, you return to Shadows. Harold, again, is waiting for you. Probably with another quest. You approach him.
-		"Oh! Great adventurer! You have saved us once again, thank you so much! But, oh, great adventurer, we need your assistance again! You see, the other residents of Shadows
-		are ill. While you were out killing the ghosts, disease struck the town. "the cause?" you ask? Monsters! Out in the forest, near the path to the village are two very
-		strong witches. They have cursed us with disease. Please kill them and cure our people!"<br>
-		Your goal: Kill 2 witches.';
+		text = 'After defeating the meddlesome ghosts, you return to Shadows. Harold, again, is waiting for you. Probably with another quest. You approach him. '
+		+ '"Oh! Great adventurer! You have saved us once again, thank you so much! But, oh, great adventurer, we need your assistance again! You see, the other residents of Shadows '
+		+ 'are ill. While you were out killing the ghosts, disease struck the town. "the cause?" you ask? Monsters! Out in the forest, near the path to the village are two very '
+		+ 'strong witches. They have cursed us with disease. Please kill them and cure our people!"<br> '
+		+ 'Your goal: Kill 2 witches.';
+		if(counter >= 2){
+			story++;
+			counter = 0;
+		}
 	}
-	else{
-		text = '"Oh great adventurer!" exclaimed Harold. "You have saved our entire village! Thank you so much! We name you our hero, and will construct
-		a statue in your honor, as gratitude for saving us all from these terrible beasts!" <br>
-		Congratulations, you have won Adventure Game!!!!!!';
+	if(story > 2){
+		text = '"Oh great adventurer!" exclaimed Harold. "You have saved our entire village! Thank you so much! We name you our hero, and will construct '
+		+ 'a statue in your honor, as gratitude for saving us all from these terrible beasts!" <br>'
+		+ 'Congratulations, you have won Adventure Game!!!!!!';
 	}
 	main.innerHTML += text;
+	counter = 0;
 }
 
 
