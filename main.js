@@ -54,7 +54,7 @@ function setDoc(documentM, documentS, documentB, documentO){
 function goPlace(place){
 	loc = place;
 	if(place == 'Town'){
-		main.innerHTML = "<p>Welcome to town.</p><br>";
+		main.innerHTML = "<p>Welcome to the town of Shadows.</p><br>";
 		dispStory();
 		options.innerHTML = '<button class="button" onclick="saveData()">Save</button>';
 		options.innerHTML += '<button class="button" onclick="go("Healer")">Visit the healer.</button>';
@@ -221,10 +221,30 @@ function saveData(){
 function dispStory(){
 	var text;
 	if(story == 0){
-		text = 'Begining story/quest info';
+		text = 'You enter the town of Shadows. It is a small town, with only a handful of residents. One of them approaches you and says "Oh great adventurer! Please save us! 
+		Our town is surrounded by a dark forest which has been taken over by many beasts and monsters! The townspeople are too weak to fight. You must help us! However, the forest
+		is cursed. If you try to leave before defeating a group of monsters, they will contact others in their group, and will be reinforced when you return. You must defeat them
+		in one trip!"<br>
+		Your goal: Defeat 4 monsters.';
+	}
+
+	if(story == 1){
+		text = 'You return to Shadows. The resident, Harold, was waiting for you. "Oh thank you! You defeated the monsters! I know there are still more lurking out there, but we have
+		another bigger problem. Our town is currently cut off from all trade because of a group of dark ghosts terrorizing traders. Please, great adventurer, defeat these ghosts!"<br>
+		Your goal: Defeat 6 ghosts.';
+	}
+
+	if(story == 2){
+		text = 'After defeating the meddlesome ghosts, you return to Shadows. Harold, again, is waiting for you. Probably with another quest. You approach him.
+		"Oh! Great adventurer! You have saved us once again, thank you so much! But, oh, great adventurer, we need your assistance again! You see, the other residents of Shadows
+		are ill. While you were out killing the ghosts, disease struck the town. "the cause?" you ask? Monsters! Out in the forest, near the path to the village are two very
+		strong witches. They have cursed us with disease. Please kill them and cure our people!"<br>
+		Your goal: Kill 2 witches.';
 	}
 	else{
-		text = 'finished story stuff'
+		text = '"Oh great adventurer!" exclaimed Harold. "You have saved our entire village! Thank you so much! We name you our hero, and will construct
+		a statue in your honor, as gratitude for saving us all from these terrible beasts!" <br>
+		Congratulations, you have won Adventure Game!!!!!!';
 	}
 	main.innerHTML += text;
 }
