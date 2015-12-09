@@ -69,6 +69,7 @@
 	}
 
 	function logout(){
+		session_start();
 		unset($_SESSION['user']);
 		unset($_SESSION['lvl']);
 		unset($_SESSION['exp']);
@@ -78,6 +79,7 @@
 	}
 
 	function storeStats(){
+		session_start();
 		global $conn;
 		$com = "UPDATE users SET level='".$_SESSION['lvl']."', exp='".
 			$_SESSION['exp']."'health='".$_SESSION['hp']."', story='".

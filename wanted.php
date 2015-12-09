@@ -28,9 +28,10 @@
 		}
 	}
 	elseif($want == "save"){
+		session_start();
 		$_SESSION['lvl'] = $_POST["level"];
 		$_SESSION['exp'] = $_POST["xp"];
-		$_SESSION['hp'] =$_POST["health"];
+		$_SESSION['hp'] = $_POST["health"];
 		$_SESSION['story'] = $_POST["sty"];
 		storeStats();
 	}
