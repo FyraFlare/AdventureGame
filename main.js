@@ -117,7 +117,7 @@ function encounter(){
 		monster = data;
 		battle.innerHTML = 'You encountered a '+monster+' in the '+loc+'.<br>';
 	});
-	options.innerHTML = '<button class="button" onclick="atack()">Atack</button>';
+	options.innerHTML = '<button class="button" onclick="atack()">Attack</button>';
 	options.innerHTML += '<button class="button" onclick="defend()">Defend</button>';
 }
 
@@ -187,14 +187,14 @@ function takeDamage(t, d){
 
 function die(){
 	battle.innerHTML += 'The '+monster+' killed you.<br>';
-	options.innerHTML = '<button class="button" onclick="loadData()">Contine</button>';
+	options.innerHTML = '<button class="button" onclick="loadData()">Continue</button>';
 }
 
 function kill(){
 	var gain = (elvl + 2) * 5;
 	gainXP(gain);
 	battle.innerHTML += 'You killed the '+monster+'.<br>';
-	options.innerHTML = '<button class="button" onclick="endEncounter()">Contine</button>';
+	options.innerHTML = '<button class="button" onclick="endEncounter()">Continue</button>';
 	if(story == 0){
 		counter++;
 	}
