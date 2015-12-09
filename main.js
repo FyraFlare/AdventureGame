@@ -14,11 +14,13 @@ var ehp;
 var elvl;
 
 function login(){
+	console.log('first');
 	var user = document.getElementById('username').value;
 	var pass = document.getElementById('pass').value;
 	var args = {submit: 'Login', username: user, pass: pass};
+	console.log('here')
 	$http.post("login.php", args).then(function(data){
-		//TODO
+		console.log('and here')
 	});
 }
 
@@ -282,3 +284,5 @@ var $http = (function (){
         },
     };
 }());
+
+console.log('end of file');
