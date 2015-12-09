@@ -13,7 +13,7 @@
 	<div id="main"><p>Description of area here</p></div><br>
 	<div id="battle"><p>battle log<br>fight info goes here</p></div>
 	<div id="options"><button class="button">A button.</button> <button class="button">Another button.</button></div>
-	<div id="logout"><button class="button" onclick='logout()'>Logout</button></div>
+	<div id="logout"><button class="button logoutButton" onclick='logout()'>Logout</button></div>
 	<script>
 		var args = {want: 'session'};
 		$http.post("wanted.php", args).then(function(data){
