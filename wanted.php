@@ -13,9 +13,10 @@
 		else{
 			$str = 'strong';
 		}
-		echo register($_POST["mons"], $str);
+		echo getAtackText($_POST["mons"], $str);
 	}
 	elseif($want == "stat"){
+		session_start();
 		echo $_SESSION[$_POST['stat']];
 	}
 	elseif($want == "session"){
@@ -26,7 +27,7 @@
 			echo 'bad';
 		}
 	}
-	elseif($want == "stat"){
+	elseif($want == "save"){
 		$_SESSION['lvl'] = $_POST["level"];
 		$_SESSION['exp'] = $_POST["xp"];
 		$_SESSION['hp'] =$_POST["health"];

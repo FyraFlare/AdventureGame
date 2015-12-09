@@ -87,6 +87,7 @@
 	}
 
 	function getMonster($loc){
+		global $conn;
 		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE location='".$loc."';");
 		$stmt ->execute();
 		$result = $stmt->fetchAll();
@@ -102,6 +103,7 @@
 	}
 
 	function getAtackText($mons, $strength){
+		global $conn;
 		$stmt = $conn -> prepare("SELECT * FROM monsters WHERE name='".$mons."';");
 		$stmt ->execute();
 		$result = $stmt->fetchAll();

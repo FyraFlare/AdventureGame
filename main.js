@@ -64,19 +64,20 @@ function goPlace(place){
 	if(place == 'Town'){
 		main.innerHTML = "<p>Welcome to the town of Shadows.</p><br>";
 		dispStory();
+		console.log('finished dispStory');
 		options.innerHTML = '<button class="button" onclick="saveData()">Save</button>';
-		options.innerHTML += '<button class="button" onclick="go("Healer")">Visit the healer.</button>';
-		//options.innerHTML += '<button class="button" onclick="go("Shop")">Go to shop.</button>';
-		options.innerHTML += '<button class="button" onclick="go("Forest")">Go to forest.</button>';
+		options.innerHTML += '<button class="button" onclick="goPlace('+"'Healer'"+')">Visit the healer.</button>';
+		//options.innerHTML += '<button class="button" onclick="goPlace('+"'Shop'"+')">Go to shop.</button>';
+		options.innerHTML += '<button class="button" onclick="goPlace('+"'Forest'"+')">Go to forest.</button>';
 	}
 	else if(place == 'Healer'){
 		heal();
 		main.innerHTML = "<p>The healer patches you up and wishes you luck on your adventures.</p><br>";
-		options.innerHTML = '<button class="button" onclick="go("Town")">Leave</button>';
+		options.innerHTML = '<button class="button" onclick="goPlace('+"'Town'"+')">Leave</button>';
 	}
 	else if(place == 'Shop'){
 		main.innerHTML = "<p>This is a shop. Nothin to buy yet.</p><br>";
-		options.innerHTML = '<button class="button" onclick="go("Town")">Leave</button>';
+		options.innerHTML = '<button class="button" onclick="goPlace('+"'Town'"+')">Leave</button>';
 	}
 	else if(place == 'Forest'){
 		main.innerHTML = "<p>The dark and scary forest looms around you.</p><br>";
@@ -123,27 +124,29 @@ function encounter(){
 
 function endEncounter(){
 	battle.innerHTML = '';
-	options.innerHTML = '<button class="button" onclick="go("Town")">Return to town.</button>';
+	options.innerHTML = '<button class="button" onclick="goPlace('+"'Town'"+')">Return to town.</button>';
 	options.innerHTML += '<button class="button" onclick="encounter()">Keep exploring.</button>';
 }
 
 function atack(){
 	takeDamage('e', atackPow('p'));
-	battle.innerHTML += ' and hits.<br>';
-	takeDamage('p', atackPow('e'));
+	var dmg = atackPow('e', ' and hits.<br>');
+	takeDamage('p', dmg);
 }
 
 function defend(){
 	var hit = Math.floor((Math.random()*2));
 	if(hit < 1){
-		takeDamage('p', Math.floor(atackPow('e')/2));
+		var dmg = Math.floor(atackPow('e', ' but barely hits.<br>')/2);
+		takeDamage('p', dmg);
 	}
 	else{
-		takeDamage('e', atackPow('e'));
+		var dmg = atackPow('e', ' but it cuts itself on your sword.<br>');
+		takeDamage('e', dmg);
 	}
 }
 
-function atackPow(t){
+function atackPow(t, r){
 	var hit = Math.floor((Math.random()*2))+1;
 	if(t == 'p'){
 		l = lvl;
@@ -151,11 +154,10 @@ function atackPow(t){
 	}
 	else{
 		l = elvl;
-		var args = {want: 'atack', str: hit};
+		var args = {want: 'atack', str: hit, mons: monster};
 		$http.post("wanted.php", args).then(function(data){
-			var disc = data;
+			battle.innerHTML += 'The '+monster+' '+data+r;
 		});
-		battle.innerHTML += 'The '+monster+disc;
 	}
 	hit = hit*l+5;
 	return hit;
@@ -163,12 +165,15 @@ function atackPow(t){
 
 function takeDamage(t, d){
 	if(t == 'p'){
+		battle.innerHTML += 'You took '+d+' damage.<br>';
+		hp -= d;
 		h = hp;
+		dispStats();
 	}
 	else{
+		ehp -= d;
 		h = ehp;
 	}
-	h -= d;
 	if(h < 1){
 		if(t == 'p'){
 			die();
@@ -207,36 +212,42 @@ function gainXP(g){
 		lvl++;
 		battle.innerHTML += 'You have reached level '+lvl+'!<br>';
 	}
+	dispStats();
 }
 
 function loadData(){
 	var args = {want: 'stat', stat: 'lvl'};
 	$http.post("wanted.php", args).then(function(data){
-		lvl = data;
+		lvl = parseInt(data);
 		var args = {want: 'stat', stat: 'hp'};
 		$http.post("wanted.php", args).then(function(data){
-			hp = data;
+			hp = parseInt(data);
 			var args = {want: 'stat', stat: 'exp'};
 			$http.post("wanted.php", args).then(function(data){
-				exp = data;
+				exp = parseInt(data);
 				dispStats();
 			});
 		});
 	});
+	counter = 0;
 	var args = {want: 'stat', stat: 'story'};
 	$http.post("wanted.php", args).then(function(data){
-		story = data;
+		story = parseInt(data);
+		goPlace('Town');
 	});
-	goPlace('Town');
 }
 
 function saveData(){
+	battle.innerHTML += 'Saving data...<br>';
 	var args = {want: 'save', level: lvl, health: hp, xp: exp, sty: story};
-	$http.post("wanted.php", args).then(function(data){});
+	$http.post("wanted.php", args).then(function(data){
+		battle.innerHTML += 'Your data has been saved.<br>';
+	});
 }
 
 function dispStory(){
 	var text;
+	console.log('in dispStory');
 	if(story == 0){
 		text = 'You enter the town of Shadows. It is a small town, with only a handful of residents. One of them approaches you and says "Oh great adventurer! Please save us! '
 		+ 'Our town is surrounded by a dark forest which has been taken over by many beasts and monsters! The townspeople are too weak to fight. You must help us! However, the forest '
